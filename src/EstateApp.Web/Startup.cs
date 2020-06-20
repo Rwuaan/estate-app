@@ -1,3 +1,5 @@
+using System.ComponentModel.Design;
+using System.Transactions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +27,21 @@ namespace EstateApp.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContextPool<AuthenticationDbContext>(options =>options.UseSqlServer(Configuration.GetConnectionString("AuthenticationConnection")));
+            services.AddDbContextPool<AuthenticationDbContext>(
+                options =>options.UseSqlServer(Configuration.GetConnectionString("AuthenticationConnection"),
+                
+                sqlServerOptions => {
+                    sqlServerOptions.MigrationAssembly("EstateApp.Data");
+                }
+            ));
+
+            services.AddDbContextPool<AppicationDbContext>(options => 
+                options.UseSqlServer(Configuration.GetConnectionString("ApplicationConnection"),
+
+                sqlServerOptions => {
+                    sqlServerOptions.MigrationAssembly("EstateApp");
+                }
+            ));   
             services.AddControllersWithViews();
         }
 
