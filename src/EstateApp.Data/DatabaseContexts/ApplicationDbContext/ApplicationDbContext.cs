@@ -1,3 +1,4 @@
+using EstateApp.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace EstateApp.Data.DatabaseContexts.ApplicationDbContext
@@ -8,7 +9,7 @@ namespace EstateApp.Data.DatabaseContexts.ApplicationDbContext
         {
 
         }
-        public Dbset<Property> Properties { get; set; }
-        public Dbset<Contacts> Contacts { get; set;}
+        public DbSet<Property> Properties { get; set; }
+        public DbSet<Contact> Contacts { get; set;}
     }
 }

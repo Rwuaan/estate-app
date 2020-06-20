@@ -4,15 +4,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EstateApp.Data.DatabaseContexts.AuthenticationContext
 {
-    public class AuthenticationDbContext: IdentityDbContext<ApplicationUser>
+    public class AuthenticationDbContext : IdentityDbContext<ApplicationUser>
     {
 
         public AuthenticationDbContext(DbContextOptions<AuthenticationDbContext> options)
             : base(options)
         {
-
-        }    
-
-        
+        }       
     }
 }

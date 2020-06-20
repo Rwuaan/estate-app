@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using EstateApp.Data.DatabaseContexts.ApplicationDbContext;
 
 namespace EstateApp.Web
 {
@@ -31,17 +32,19 @@ namespace EstateApp.Web
                 options =>options.UseSqlServer(Configuration.GetConnectionString("AuthenticationConnection"),
                 
                 sqlServerOptions => {
-                    sqlServerOptions.MigrationAssembly("EstateApp.Data");
+                    sqlServerOptions.MigrationsAssembly("EstateApp.Data");
                 }
+                
             ));
 
-            services.AddDbContextPool<AppicationDbContext>(options => 
+            services.AddDbContextPool<ApplicationDbContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("ApplicationConnection"),
-
+                
                 sqlServerOptions => {
-                    sqlServerOptions.MigrationAssembly("EstateApp");
+                    sqlServerOptions.MigrationsAssembly("EstateApp.Data");
                 }
             ));   
+
             services.AddControllersWithViews();
         }
 
